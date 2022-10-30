@@ -2,7 +2,7 @@ import time
 import os  
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  
 
-from RNN_ciper import RNN_Cipher
+from RNN_cipher import RNN_Cipher
 from utils import create_key, load_key, save_key, pad, unpad
 
 

@@ -203,7 +203,7 @@ class RNN_Cipher:
 
         # Prepare plaintext for encryption
         plaintext_bytes = np.array(list(plaintext))
-        scaled_plaintext = plaintext_bytes / 255 # Scale bytes
+        scaled_plaintext = plaintext_bytes / 255  # Scale bytes
         plaintext_blocks = np.reshape(scaled_plaintext, [int(len(scaled_plaintext) / self.block_size), self.block_size])
              
         ciphertext_blocks = []
@@ -225,7 +225,6 @@ class RNN_Cipher:
         # Restore KeyExpansion weights
         self.weights, self.biases = self.__init_weights(True)
         return ciphertext_blocks
-
 
 
     def DecryptBlock(self, V):
@@ -278,7 +277,7 @@ class RNN_Cipher:
             # One iteration of learning process
             X = np.array([np.concatenate((Y_prev[0], M[0]), axis=None)])
             # VV, _ = self.EncryptBlock(X)
-            # print('V: ',block[0], 'V`: ',VV, block[0] == VV) ## authentication message
+            # print('V: ',block[0], 'V`: ',VV, block[0] == VV)  ## authentication message
             MSE = self.decrypt_batch(M, X)
             
             Y_prev = Y
@@ -287,8 +286,8 @@ class RNN_Cipher:
             self.LearningAdaptation(MSE)
 
         # Convert plaintext blocks to string of bytes
-        plaintext_blocks = np.array(plaintext_blocks) * 255 # Unscale bytes
-        plaintext_blocks = np.rint(plaintext_blocks).astype(int) # Convert bytes to int
+        plaintext_blocks = np.array(plaintext_blocks) * 255  # Unscale bytes
+        plaintext_blocks = np.rint(plaintext_blocks).astype(int)  # Convert bytes to int
         plaintext_bytearray = plaintext_blocks.flatten()
         plaintext = bytes(plaintext_bytearray.tolist())
         return plaintext
